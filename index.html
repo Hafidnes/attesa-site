@@ -3,24 +3,146 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Attesa — Le plus beau compte à rebours</title>
+<title>Attesa — Compte à rebours et widgets pour iPhone et Apple Watch</title>
+<meta name="description" content="Attesa affiche le décompte de tes moments sur l'écran verrouillé, en Dynamic Island et sur ton Apple Watch. Aide, questions fréquentes et contact.">
+<meta property="og:title" content="Attesa — Compte à rebours et widgets">
+<meta property="og:description" content="Le décompte de tes moments, en direct sur ton écran verrouillé.">
+<meta property="og:type" content="website">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 42rem; margin: 0 auto; padding: 4rem 1.25rem; line-height: 1.6; text-align: center; }
-  h1 { font-size: 2.2rem; margin-bottom: .25rem; }
-  .tagline { opacity: .7; font-size: 1.1rem; }
-  a { color: #e85d4a; }
-  .links { margin-top: 3rem; }
+  :root{
+    color-scheme: light dark;
+    --bg:#fbf7f6; --card:#ffffff; --ink:#1b1416; --ink-2:#5c4d50; --muted:#8b7a7d;
+    --line:#eadfdd; --accent:#d1492f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#151011; --card:#1e1718; --ink:#f2eae9; --ink-2:#c0aeb0; --muted:#8d7b7d;
+           --line:#2e2425; --accent:#f0836b; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+  header{padding:4.5rem 0 3rem;text-align:center}
+  .icon{width:88px;height:88px;border-radius:22px;margin:0 auto 1.25rem;
+    background:radial-gradient(120% 120% at 30% 20%,#ffb199 0%,#e8654a 45%,#b8324f 100%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 30px -12px rgba(184,50,79,.55)}
+  .icon span{display:block;width:44px;height:44px;border-radius:50%;
+    border:6px solid rgba(255,255,255,.92);border-right-color:transparent;transform:rotate(-32deg)}
+  h1{font-size:2.6rem;letter-spacing:-.03em;margin:0 0 .35rem;font-weight:800}
+  .tagline{color:var(--ink-2);font-size:1.15rem;margin:0 auto 2rem;max-width:32rem}
+  .cta{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;
+    font-weight:650;font-size:1rem;padding:.85rem 1.6rem;border-radius:12px}
+  .cta:hover{opacity:.88}
+  .sub{display:block;margin-top:.9rem;color:var(--muted);font-size:.9rem}
+
+  section{padding:2.5rem 0;border-top:1px solid var(--line)}
+  h2{font-size:1.35rem;letter-spacing:-.02em;margin:0 0 1.25rem;font-weight:750}
+  .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem;
+    list-style:none;padding:0;margin:0}
+  .feats li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem}
+  .feats b{display:block;font-size:1rem;margin-bottom:.2rem}
+  .feats span{color:var(--ink-2);font-size:.93rem}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:.95rem 1.15rem;margin-bottom:.6rem}
+  summary{cursor:pointer;font-weight:650;list-style:none;display:flex;gap:.6rem;align-items:flex-start}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";color:var(--accent);font-weight:800;line-height:1.5}
+  details[open] summary::before{content:"–"}
+  details p{color:var(--ink-2);margin:.7rem 0 .1rem;font-size:.96rem}
+  details p:last-child{margin-bottom:0}
+
+  .contact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.35rem}
+  .contact p{margin:0 0 .6rem;color:var(--ink-2)}
+  .contact p:last-child{margin-bottom:0}
+  a{color:var(--accent)}
+  footer{padding:2.5rem 0 4rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;
+    display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center}
+  footer a{color:var(--muted)}
+  footer .spacer{flex:1}
+  @media (max-width:600px){ h1{font-size:2.1rem} header{padding:3rem 0 2rem} }
 </style>
 </head>
 <body>
-<h1>✨ Attesa</h1>
-<p class="tagline">Le plus beau compte à rebours pour tes moments qui comptent.<br>
-Bientôt sur l'App Store.</p>
-<div class="links">
-  <p><a href="/attesa-site/privacy/">Politique de confidentialité / Privacy Policy</a></p>
-  <p><a href="mailto:abdelhafid.younes@gmail.com">Contact</a></p>
-</div>
+
+<header>
+  <div class="wrap">
+    <div class="icon" aria-hidden="true"><span></span></div>
+    <h1>Attesa</h1>
+    <p class="tagline">Le décompte de tes moments préférés, en direct sur ton écran verrouillé, en Dynamic Island et sur ton Apple&nbsp;Watch.</p>
+    <a class="cta" href="https://apps.apple.com/fr/app/attesa/id6786703143">Télécharger sur l'App&nbsp;Store</a>
+    <span class="sub">Gratuit · iPhone et Apple Watch · iOS 17 ou version ultérieure</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Ce que fait Attesa</h2>
+    <ul class="feats">
+      <li><b>Live Activities</b><span>Le décompte en direct sur l'écran verrouillé et dans la Dynamic Island.</span></li>
+      <li><b>Apple Watch</b><span>Une app dédiée et des complications pour tes cadrans.</span></li>
+      <li><b>Widgets</b><span>Sur l'écran d'accueil comme sur l'écran verrouillé.</span></li>
+      <li><b>Tes photos</b><span>Chaque moment porte ton image ou un dégradé soigné.</span></li>
+      <li><b>Tâches par événement</b><span>Prépare chaque moment sans rien oublier.</span></li>
+      <li><b>Souvenirs</b><span>Une fois la date passée, le décompte devient un compte croissant.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Questions fréquentes</h2>
+
+    <details>
+      <summary>Attesa est-il gratuit ?</summary>
+      <p>Oui, pour tes trois premiers moments. Attesa+ débloque les événements illimités et les Live Activities en un <strong>achat unique</strong> — pas d'abonnement, pas de renouvellement automatique.</p>
+    </details>
+
+    <details>
+      <summary>J'ai changé d'iPhone, comment récupérer Attesa+ ?</summary>
+      <p>Ouvre Attesa, va dans les réglages de l'app et touche <em>Restaurer mes achats</em>. L'achat est rattaché à ton compte Apple, donc il te suit d'un appareil à l'autre tant que tu utilises le même identifiant.</p>
+      <p>Si rien ne se passe, vérifie dans Réglages&nbsp;› ton nom&nbsp;› Médias et achats que tu es bien connecté avec le compte qui a servi à l'achat.</p>
+    </details>
+
+    <details>
+      <summary>Le décompte ne s'affiche pas sur mon écran verrouillé</summary>
+      <p>Les Live Activities demandent iOS&nbsp;17 ou plus, et doivent être autorisées&nbsp;: Réglages&nbsp;› Attesa&nbsp;› Activités en direct. Vérifie aussi que le mode Économie d'énergie n'est pas actif, car il suspend les mises à jour en arrière-plan.</p>
+    </details>
+
+    <details>
+      <summary>Comment ajouter un widget ?</summary>
+      <p>Appuie longuement sur ton écran d'accueil, touche <em>+</em> en haut à gauche, cherche Attesa et choisis la taille. Pour l'écran verrouillé, appuie longuement dessus, touche <em>Personnaliser</em>, puis ajoute le widget Attesa sous l'heure.</p>
+    </details>
+
+    <details>
+      <summary>Est-ce que mes données partent quelque part ?</summary>
+      <p>Non. Attesa ne demande aucun compte, n'affiche aucune publicité et n'embarque aucun traqueur. Tes moments et tes photos restent sur ton appareil.</p>
+    </details>
+
+    <details>
+      <summary>Comment supprimer mes données ?</summary>
+      <p>Supprimer l'app suffit&nbsp;: tout est stocké localement, rien n'est conservé ailleurs. Tu peux aussi supprimer un moment à la fois depuis la liste.</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Besoin d'aide ?</h2>
+    <div class="contact">
+      <p>Écris-moi à <a href="mailto:abdelhafid.younes@gmail.com?subject=Support%20Attesa">abdelhafid.younes@gmail.com</a>. Je réponds sous 48&nbsp;heures ouvrées.</p>
+      <p>Pour aller plus vite, précise ta version d'iOS, ton modèle d'iPhone et ce que tu faisais au moment du problème.</p>
+      <p>Attesa est développée par Abdelhafid Younes, développeur indépendant, en France.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <a href="/attesa-site/privacy/">Politique de confidentialité</a>
+  <a href="mailto:abdelhafid.younes@gmail.com">Contact</a>
+  <span class="spacer"></span>
+  <span>© 2026 Abdelhafid Younes</span>
+</footer>
+
 </body>
 </html>
