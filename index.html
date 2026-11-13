@@ -3,146 +3,511 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Attesa — Compte à rebours et widgets pour iPhone et Apple Watch</title>
-<meta name="description" content="Attesa affiche le décompte de tes moments sur l'écran verrouillé, en Dynamic Island et sur ton Apple Watch. Aide, questions fréquentes et contact.">
-<meta property="og:title" content="Attesa — Compte à rebours et widgets">
-<meta property="og:description" content="Le décompte de tes moments, en direct sur ton écran verrouillé.">
+<title>Attesa — Compte à rebours en photos pour iPhone, iPad et Apple Watch</title>
+<meta name="description" content="Voyage, mariage, anniversaire : Attesa compte les jours jusqu'à tes grands moments, en photo, sur ton écran d'accueil, ton écran verrouillé et ton Apple Watch.">
+<meta property="og:title" content="Attesa — Compte les jours jusqu'à ce qui compte">
+<meta property="og:description" content="Des comptes à rebours en photo, des widgets et des tâches pour préparer chaque grand moment.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://hafidnes.github.io/attesa-site/assets/rome-clair.jpg">
+<meta name="apple-itunes-app" content="app-id=6786703143">
+<link rel="icon" href="assets/touch-icon.png">
+<link rel="apple-touch-icon" href="assets/touch-icon.png">
 <style>
   :root{
     color-scheme: light dark;
-    --bg:#fbf7f6; --card:#ffffff; --ink:#1b1416; --ink-2:#5c4d50; --muted:#8b7a7d;
-    --line:#eadfdd; --accent:#d1492f;
+    --bg:#fff7f3; --bg-2:#ffece6; --card:#ffffff; --ink:#23151a; --ink-2:#5e4a50; --muted:#8c787d;
+    --line:#f0dfda; --accent:#e8483f; --a1:#ff8a5c; --a2:#ff5470; --a3:#c8365f;
+    --shadow:0 24px 60px -28px rgba(200,54,95,.45);
+    --round:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#151011; --card:#1e1718; --ink:#f2eae9; --ink-2:#c0aeb0; --muted:#8d7b7d;
-           --line:#2e2425; --accent:#f0836b; }
+    :root{ --bg:#140e11; --bg-2:#1d1418; --card:#1f161a; --ink:#f6ecea; --ink-2:#c9b6b9; --muted:#917e82;
+           --line:#31242a; --accent:#ff8f7a; --shadow:0 24px 60px -28px rgba(0,0,0,.8); }
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
-  header{padding:4.5rem 0 3rem;text-align:center}
-  .icon{width:88px;height:88px;border-radius:22px;margin:0 auto 1.25rem;
-    background:radial-gradient(120% 120% at 30% 20%,#ffb199 0%,#e8654a 45%,#b8324f 100%);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 10px 30px -12px rgba(184,50,79,.55)}
-  .icon span{display:block;width:44px;height:44px;border-radius:50%;
-    border:6px solid rgba(255,255,255,.92);border-right-color:transparent;transform:rotate(-32deg)}
-  h1{font-size:2.6rem;letter-spacing:-.03em;margin:0 0 .35rem;font-weight:800}
-  .tagline{color:var(--ink-2);font-size:1.15rem;margin:0 auto 2rem;max-width:32rem}
-  .cta{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;
-    font-weight:650;font-size:1rem;padding:.85rem 1.6rem;border-radius:12px}
-  .cta:hover{opacity:.88}
-  .sub{display:block;margin-top:.9rem;color:var(--muted);font-size:.9rem}
-
-  section{padding:2.5rem 0;border-top:1px solid var(--line)}
-  h2{font-size:1.35rem;letter-spacing:-.02em;margin:0 0 1.25rem;font-weight:750}
-  .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem;
-    list-style:none;padding:0;margin:0}
-  .feats li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem}
-  .feats b{display:block;font-size:1rem;margin-bottom:.2rem}
-  .feats span{color:var(--ink-2);font-size:.93rem}
-
-  details{background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:.95rem 1.15rem;margin-bottom:.6rem}
-  summary{cursor:pointer;font-weight:650;list-style:none;display:flex;gap:.6rem;align-items:flex-start}
-  summary::-webkit-details-marker{display:none}
-  summary::before{content:"+";color:var(--accent);font-weight:800;line-height:1.5}
-  details[open] summary::before{content:"–"}
-  details p{color:var(--ink-2);margin:.7rem 0 .1rem;font-size:.96rem}
-  details p:last-child{margin-bottom:0}
-
-  .contact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.35rem}
-  .contact p{margin:0 0 .6rem;color:var(--ink-2)}
-  .contact p:last-child{margin-bottom:0}
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
   a{color:var(--accent)}
-  footer{padding:2.5rem 0 4rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;
-    display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center}
+  .wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+  .grad{background:linear-gradient(120deg,var(--a1),var(--a2) 55%,var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* Barre du haut */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);
+    background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+  nav .wrap{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  nav .links{display:flex;gap:1.4rem;margin-left:auto}
+  nav .links a{color:var(--ink-2);text-decoration:none;font-size:.94rem;font-weight:550}
+  nav .links a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:.55rem;background:linear-gradient(120deg,var(--a1),var(--a2) 60%,var(--a3));
+    color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:.8rem 1.5rem;font-size:1rem;
+    box-shadow:0 12px 28px -14px rgba(232,72,63,.8);transition:transform .2s ease, box-shadow .2s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -14px rgba(232,72,63,.9)}
+  .btn svg{width:1.15em;height:1.15em;fill:currentColor}
+  .btn.small{padding:.5rem 1.05rem;font-size:.9rem;box-shadow:none}
+
+  /* Ouverture */
+  .hero{position:relative;padding:4.5rem 0 5rem}
+  .hero::before{content:"";position:absolute;inset:-12rem -20% auto;height:44rem;z-index:-1;
+    background:radial-gradient(42rem 26rem at 78% 30%,color-mix(in srgb,var(--a2) 26%,transparent),transparent 70%),
+               radial-gradient(34rem 22rem at 12% 12%,color-mix(in srgb,var(--a1) 24%,transparent),transparent 70%)}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center}
+  .eyebrow{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+  h1{font-size:clamp(2.5rem,6vw,4.3rem);line-height:1.02;letter-spacing:-.04em;margin:0 0 1.25rem;font-weight:850}
+  .lead{font-size:1.2rem;color:var(--ink-2);max-width:31rem;margin:0 0 2rem}
+  .meta{margin-top:1rem;color:var(--muted);font-size:.9rem}
+
+  .stage{position:relative;justify-self:center;width:min(100%,21rem);aspect-ratio:9/18.6;container-type:inline-size}
+  .phone{position:absolute;inset:0;border-radius:3rem;overflow:hidden;background:#111 center/cover;
+    box-shadow:0 0 0 .55rem #17100f,0 0 0 .62rem #3a2c2b,var(--shadow);color:#fff}
+  .phone::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 28%,rgba(0,0,0,.2) 55%,rgba(8,10,20,.82))}
+  .island{position:absolute;top:.8rem;left:50%;transform:translateX(-50%);width:32%;height:1.55rem;background:#000;border-radius:999px;z-index:2}
+  .screen{position:absolute;inset:0;z-index:1;padding:44% 9% 9%;display:flex;flex-direction:column}
+  .screen .flag{font-size:9.5cqw;line-height:1}
+  .screen h3{font-size:7.2cqw;white-space:nowrap;margin:.5rem 0 0;letter-spacing:-.02em;font-weight:650}
+  .big{display:flex;align-items:baseline;gap:.4rem;margin-top:.4rem}
+  .big b{font:800 25.5cqw/1 var(--round);letter-spacing:-.04em}
+  .big span{font-size:5.4cqw;opacity:.9}
+  .hms{display:flex;gap:6.5cqw;margin-top:4cqw}
+  .hms div{font:700 7.1cqw/1.1 var(--round)}
+  .hms small{display:block;font:400 3.4cqw/1.4 -apple-system,sans-serif;opacity:.78}
+  .when{margin-top:4cqw;font-size:4.3cqw;opacity:.9}
+  .glass{margin-top:auto;border-radius:1.3rem;padding:3.8cqw 4.5cqw;font-size:4cqw;line-height:1.7;
+    background:rgba(30,28,40,.42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14)}
+  .float{position:absolute;border-radius:7cqw;overflow:hidden;color:#fff;background:#222 center/cover;box-shadow:var(--shadow);
+    animation:bob 7s ease-in-out infinite}
+  .float::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.6))}
+  .float > *{position:relative;z-index:1}
+  .w1{width:43cqw;height:43cqw;left:-25cqw;top:-6cqw;padding:3.6cqw;display:flex;flex-direction:column;justify-content:flex-end}
+  .w2{width:45cqw;height:29cqw;right:-27cqw;bottom:20%;padding:3.4cqw;display:flex;flex-direction:column;justify-content:flex-end;animation-delay:-3.5s}
+  .float b{font:800 9.5cqw/1 var(--round)}
+  .float small{font-size:3.5cqw;opacity:.92}
+  @keyframes bob{50%{transform:translateY(-10px)}}
+
+  /* Sections */
+  section{padding:4.5rem 0}
+  .head{max-width:38rem;margin:0 0 2.5rem}
+  h2{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.035em;line-height:1.1;margin:0 0 .8rem;font-weight:820}
+  .head p{color:var(--ink-2);font-size:1.08rem;margin:0}
+  .tint{background:var(--bg-2)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:1.4rem;padding:1.5rem;transition:transform .25s ease, box-shadow .25s ease}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .feat .ic{width:2.75rem;height:2.75rem;border-radius:.85rem;display:grid;place-items:center;margin-bottom:1rem;
+    background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 22%,transparent),color-mix(in srgb,var(--a2) 26%,transparent))}
+  .feat .ic svg{width:1.4rem;height:1.4rem;stroke:var(--accent);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .feat h3{font-size:1.08rem;margin:0 0 .35rem;letter-spacing:-.01em}
+  .feat p{margin:0;color:var(--ink-2);font-size:.95rem}
+  .tag{display:inline-block;margin-left:.4rem;font-size:.68rem;font-weight:750;letter-spacing:.04em;vertical-align:middle;
+    padding:.1rem .45rem;border-radius:999px;color:#fff;background:linear-gradient(120deg,var(--a1),var(--a2))}
+
+  /* Ambiances */
+  .moodbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .switch{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.25rem}
+  .switch button{border:0;background:none;color:var(--ink-2);font:650 .92rem -apple-system,sans-serif;padding:.5rem 1.1rem;border-radius:999px;cursor:pointer}
+  .switch button[aria-pressed="true"]{background:linear-gradient(120deg,var(--a1),var(--a2));color:#fff}
+  .moods{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+  .mood{position:relative;border-radius:1.3rem;overflow:hidden;aspect-ratio:3/2;margin:0;background:var(--line)}
+  .mood:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+  .mood img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s ease, transform .8s ease}
+  .mood img.night{opacity:0}
+  .moods.night .mood img.night{opacity:1}
+  .mood:hover img{transform:scale(1.05)}
+  .mood figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .9rem .7rem;color:#fff;font-weight:650;font-size:.92rem;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.62))}
+  .ills{display:flex;gap:.8rem;margin-top:1.2rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:none}
+  .ills::-webkit-scrollbar{display:none}
+  .ills img{flex:0 0 auto;width:7.2rem;aspect-ratio:3/4;object-fit:cover;border-radius:1.1rem}
+
+  /* Captures */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  .shots{display:flex;gap:1.2rem;justify-content:center;align-items:flex-end}
+  .shots img{border-radius:1.9rem;box-shadow:0 0 0 .32rem #17100f,var(--shadow);width:44%;height:auto}
+  .shots img:last-child{transform:translateY(-1.6rem)}
+  .list{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.9rem}
+  .list li{display:flex;gap:.8rem;color:var(--ink-2)}
+  .list li::before{content:"";flex:0 0 .55rem;height:.55rem;margin-top:.55rem;border-radius:50%;background:linear-gradient(120deg,var(--a1),var(--a2))}
+  .list b{color:var(--ink)}
+
+  /* Attesa+ */
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:46rem}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:1.5rem;padding:1.7rem}
+  .plan.plus{border:0;color:#fff;background:linear-gradient(140deg,var(--a1),var(--a2) 55%,var(--a3));box-shadow:var(--shadow)}
+  .plan h3{margin:0 0 .2rem;font-size:1.25rem}
+  .plan .price{font:800 1.9rem/1.2 var(--round);margin:.2rem 0 1rem}
+  .plan ul{margin:0;padding:0;list-style:none;display:grid;gap:.5rem;font-size:.96rem}
+  .plan li::before{content:"✓";margin-right:.55rem;font-weight:800}
+  .plan:not(.plus) li{color:var(--ink-2)}
+
+  /* Questions */
+  .faq{max-width:46rem}
+  details{background:var(--card);border:1px solid var(--line);border-radius:1.1rem;padding:1rem 1.2rem;margin-bottom:.6rem}
+  summary{cursor:pointer;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--accent);font-weight:800;font-size:1.2rem;line-height:1.2}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--ink-2);margin:.7rem 0 0;font-size:.97rem}
+
+  .closing{text-align:center;padding:5rem 0}
+  .closing img{width:84px;height:84px;border-radius:20px;margin:0 auto 1.4rem;box-shadow:var(--shadow)}
+  .closing p{color:var(--ink-2);max-width:30rem;margin:0 auto 1.8rem;font-size:1.08rem}
+  .help{background:var(--card);border:1px solid var(--line);border-radius:1.4rem;padding:1.5rem;max-width:46rem;color:var(--ink-2)}
+  .help p{margin:0 0 .5rem}.help p:last-child{margin:0}
+  footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.88rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center}
   footer a{color:var(--muted)}
-  footer .spacer{flex:1}
-  @media (max-width:600px){ h1{font-size:2.1rem} header{padding:3rem 0 2rem} }
+  footer .sp{flex:1}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .hero{padding:2.5rem 0 3.5rem}
+    .hero .wrap,.duo{grid-template-columns:1fr;gap:2.5rem}
+    .stage{width:min(72%,18rem)}
+    .w1{left:-17cqw}.w2{right:-17cqw}
+    .grid{grid-template-columns:1fr 1fr}
+    .moods{grid-template-columns:1fr 1fr}
+    .mood:first-child{grid-row:auto;aspect-ratio:3/2}
+    nav .links{display:none}
+    nav .btn{margin-left:auto}
+    section{padding:3.2rem 0}
+  }
+  @media (max-width:560px){
+    .grid,.plans{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .float{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+    .mood img,.feat,.btn{transition:none}
+  }
 </style>
 </head>
 <body>
 
-<header>
+<nav>
   <div class="wrap">
-    <div class="icon" aria-hidden="true"><span></span></div>
-    <h1>Attesa</h1>
-    <p class="tagline">Le décompte de tes moments préférés, en direct sur ton écran verrouillé, en Dynamic Island et sur ton Apple&nbsp;Watch.</p>
-    <a class="cta" href="https://apps.apple.com/fr/app/attesa/id6786703143">Télécharger sur l'App&nbsp;Store</a>
-    <span class="sub">Gratuit · iPhone et Apple Watch · iOS 17 ou version ultérieure</span>
+    <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="32" height="32">Attesa</a>
+    <div class="links">
+      <a href="#partout">Fonctions</a>
+      <a href="#ambiances">Ambiances</a>
+      <a href="#plus">Attesa+</a>
+      <a href="#questions">Questions</a>
+    </div>
+    <a class="btn small" href="https://apps.apple.com/fr/app/attesa/id6786703143">Télécharger</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Compte à rebours en photos</span>
+      <h1>Compte les jours jusqu'à <span class="grad">ce qui compte.</span></h1>
+      <p class="lead">Voyage, mariage, anniversaire, remise des clés&nbsp;: Attesa transforme chaque date en un compte à rebours en image, sous tes yeux sur ton iPhone, ton iPad et ton Apple&nbsp;Watch.</p>
+      <a class="btn" href="https://apps.apple.com/fr/app/attesa/id6786703143">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.73-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.75 2.21 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.7.71 2.87.69 1.19-.02 1.94-1.08 2.66-2.15.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.54ZM14.2 6.1c.61-.74 1.02-1.77.91-2.8-.88.04-1.94.59-2.57 1.33-.56.65-1.06 1.7-.93 2.7.98.08 1.98-.5 2.59-1.23Z"/></svg>
+        Télécharger sur l'App&nbsp;Store
+      </a>
+      <p class="meta">Gratuit jusqu'à 5 moments · iPhone, iPad et Apple Watch · iOS&nbsp;17 ou version ultérieure</p>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="phone" id="phone" style="background-image:url(assets/rome-clair.jpg)">
+        <div class="island"></div>
+        <div class="screen">
+          <div class="flag">🇮🇹</div>
+          <h3>Week-end à Rome</h3>
+          <div class="big"><b id="d">46</b><span>jours</span></div>
+          <div class="hms">
+            <div><span id="h">02</span><small>heures</small></div>
+            <div><span id="m">26</span><small>minutes</small></div>
+            <div><span id="s">37</span><small>secondes</small></div>
+          </div>
+          <div class="when" id="when">28 décembre</div>
+          <div class="glass">📍 Rome, Italie<br>☑︎ 1/3 tâches<br>⚡︎ Suivi sur l'écran verrouillé</div>
+        </div>
+      </div>
+      <div class="float w1" style="background-image:url(assets/ill-birthday.jpg)"><b>79</b><small>jours · Anniversaire de Léa</small></div>
+      <div class="float w2" style="background-image:url(assets/ill-wedding.jpg)"><b>282</b><small>jours · Mariage</small></div>
+    </div>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <section>
-    <h2>Ce que fait Attesa</h2>
-    <ul class="feats">
-      <li><b>Live Activities</b><span>Le décompte en direct sur l'écran verrouillé et dans la Dynamic Island.</span></li>
-      <li><b>Apple Watch</b><span>Une app dédiée et des complications pour tes cadrans.</span></li>
-      <li><b>Widgets</b><span>Sur l'écran d'accueil comme sur l'écran verrouillé.</span></li>
-      <li><b>Tes photos</b><span>Chaque moment porte ton image ou un dégradé soigné.</span></li>
-      <li><b>Tâches par événement</b><span>Prépare chaque moment sans rien oublier.</span></li>
-      <li><b>Souvenirs</b><span>Une fois la date passée, le décompte devient un compte croissant.</span></li>
-    </ul>
-  </section>
+<section id="partout">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Ton décompte, partout où tu regardes.</h2>
+      <p>Pas besoin d'ouvrir l'app pour savoir combien de jours il reste&nbsp;: Attesa s'installe là où tes yeux se posent déjà.</p>
+    </div>
+    <div class="grid">
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2.2"/><rect x="13" y="3" width="8" height="8" rx="2.2"/><rect x="3" y="13" width="18" height="8" rx="2.2"/></svg></div>
+        <h3>Widgets d'écran d'accueil</h3>
+        <p>Un moment en vedette ou la liste de tes prochains moments, en petit, moyen ou grand format, avec ta photo.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10 6h4M9 14h6M9 17h4"/></svg></div>
+        <h3>Écran verrouillé</h3>
+        <p>Trois formats de widget sous l'heure&nbsp;: tes jours restants d'un simple coup d'œil.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Activités en direct <span class="tag">ATTESA+</span></h3>
+        <p>Le décompte en temps réel sur l'écran verrouillé et dans la Dynamic Island, à l'approche du grand jour.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="6.5" y="6" width="11" height="12" rx="3"/><path d="M9 6 9.6 2.5h4.8L15 6M9 18l.6 3.5h4.8L15 18M12 10v2.4l1.6 1"/></svg></div>
+        <h3>Apple Watch</h3>
+        <p>Une app dédiée et des complications pour tes cadrans, synchronisées avec ton iPhone.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M12 4v16"/></svg></div>
+        <h3>iPad et iPhone Duo</h3>
+        <p>Une mise en page pensée pour les grands écrans&nbsp;: ta bibliothèque d'un côté, ton moment de l'autre.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 15V3M8 7l4-4 4 4"/></svg></div>
+        <h3>Carte à partager</h3>
+        <p>Envoie ton compte à rebours en une belle image à celles et ceux qui attendent avec toi.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Questions fréquentes</h2>
+<section id="ambiances" class="tint">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Chaque moment a son ambiance.</h2>
+      <p>Choisis ta propre photo, une illustration ou l'une des onze ambiances photographiques. Chacune existe en version jour et nuit, et suit l'apparence de ton iPhone.</p>
+    </div>
+    <div class="moodbar reveal">
+      <div class="switch" role="group" aria-label="Version des ambiances">
+        <button type="button" id="day" aria-pressed="true">☀️ Jour</button>
+        <button type="button" id="night" aria-pressed="false">🌙 Nuit</button>
+      </div>
+    </div>
+    <div class="moods reveal" id="moods"></div>
+    <div class="ills reveal">
+      <img src="assets/ill-travel.jpg" alt="Illustration voyage" loading="lazy">
+      <img src="assets/ill-birthday.jpg" alt="Illustration anniversaire" loading="lazy">
+      <img src="assets/ill-celebration.jpg" alt="Illustration fête" loading="lazy">
+      <img src="assets/ill-wedding.jpg" alt="Illustration mariage" loading="lazy">
+      <img src="assets/ill-study.jpg" alt="Illustration études" loading="lazy">
+      <img src="assets/ill-concert.jpg" alt="Illustration concert" loading="lazy">
+      <img src="assets/ill-family.jpg" alt="Illustration famille" loading="lazy">
+      <img src="assets/ill-work.jpg" alt="Illustration travail" loading="lazy">
+    </div>
+  </div>
+</section>
 
-    <details>
-      <summary>Attesa est-il gratuit ?</summary>
-      <p>Oui, pour tes trois premiers moments. Attesa+ débloque les événements illimités et les Live Activities en un <strong>achat unique</strong> — pas d'abonnement, pas de renouvellement automatique.</p>
-    </details>
+<section id="preparer">
+  <div class="wrap duo">
+    <div class="shots reveal">
+      <img src="assets/shot-editeur.jpg" alt="L'éditeur d'Attesa : emoji, couleur, illustration et ambiance" loading="lazy" width="506" height="1100">
+      <img src="assets/shot-detail.jpg" alt="Un moment dans Attesa : 46 jours avant un week-end à Rome" loading="lazy" width="506" height="1100">
+    </div>
+    <div class="reveal">
+      <h2>Attendre, c'est aussi se préparer.</h2>
+      <p style="color:var(--ink-2);font-size:1.08rem;margin:0">Attesa ne se contente pas de compter&nbsp;: elle t'aide à arriver prêt au grand jour.</p>
+      <ul class="list">
+        <li><span><b>Des tâches par moment.</b> Valises, cadeaux, réservations&nbsp;: chaque liste reste avec l'événement qu'elle prépare.</span></li>
+        <li><span><b>Des rappels au bon moment.</b> Le jour même, la veille ou bien avant, avec un résumé de ta semaine le dimanche si tu le souhaites.</span></li>
+        <li><span><b>Un import en deux touches.</b> Récupère les événements de ton calendrier et les anniversaires de tes contacts, uniquement ceux que tu choisis.</span></li>
+        <li><span><b>Des moments qui reviennent.</b> Anniversaires et fêtes se répètent tout seuls, d'année en année.</span></li>
+        <li><span><b>Des souvenirs qui restent.</b> Une fois la date passée, le moment rejoint tes souvenirs et compte les jours écoulés.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <details>
-      <summary>J'ai changé d'iPhone, comment récupérer Attesa+ ?</summary>
-      <p>Ouvre Attesa, va dans les réglages de l'app et touche <em>Restaurer mes achats</em>. L'achat est rattaché à ton compte Apple, donc il te suit d'un appareil à l'autre tant que tu utilises le même identifiant.</p>
-      <p>Si rien ne se passe, vérifie dans Réglages&nbsp;› ton nom&nbsp;› Médias et achats que tu es bien connecté avec le compte qui a servi à l'achat.</p>
-    </details>
+<section id="vie-privee" class="tint">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Tes moments t'appartiennent.</h2>
+      <p>Pas de compte à créer, pas de publicité, pas de revente de données.</p>
+    </div>
+    <div class="grid">
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10.5 3.75 3.75 0 0 1 17.5 18Z"/></svg></div>
+        <h3>Sur tes appareils et ton iCloud</h3>
+        <p>Tes moments et tes photos restent chez toi et se synchronisent entre tes appareils via ton iCloud personnel.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></div>
+        <h3>Verrouillage par Face&nbsp;ID</h3>
+        <p>Protège l'accès à l'app et masque le nom de tes moments dans les notifications.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.1 7.5 9.5 4.4-1.4 7.5-4.9 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></div>
+        <h3>Statistiques facultatives</h3>
+        <p>Le partage de statistiques et de diagnostics est désactivé par défaut. Tu décides, et tu peux changer d'avis à tout moment.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <details>
-      <summary>Le décompte ne s'affiche pas sur mon écran verrouillé</summary>
-      <p>Les Live Activities demandent iOS&nbsp;17 ou plus, et doivent être autorisées&nbsp;: Réglages&nbsp;› Attesa&nbsp;› Activités en direct. Vérifie aussi que le mode Économie d'énergie n'est pas actif, car il suspend les mises à jour en arrière-plan.</p>
-    </details>
+<section id="plus">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Gratuit pour commencer. Un seul achat pour tout débloquer.</h2>
+      <p>Pas d'abonnement, pas de renouvellement automatique&nbsp;: Attesa+ s'achète une fois et te suit sur tous tes appareils.</p>
+    </div>
+    <div class="plans reveal">
+      <div class="plan">
+        <h3>Attesa</h3>
+        <div class="price">Gratuit</div>
+        <ul>
+          <li>Jusqu'à 5 moments</li>
+          <li>Widgets et Apple Watch</li>
+          <li>Photos, illustrations et ambiances</li>
+          <li>Tâches, rappels et imports</li>
+        </ul>
+      </div>
+      <div class="plan plus">
+        <h3>Attesa+</h3>
+        <div class="price">Achat unique</div>
+        <ul>
+          <li>Moments illimités</li>
+          <li>Activités en direct et Dynamic Island</li>
+          <li>Tout ce qu'offre la version gratuite</li>
+          <li>Prix affiché dans l'app, selon ton pays</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <details>
-      <summary>Comment ajouter un widget ?</summary>
-      <p>Appuie longuement sur ton écran d'accueil, touche <em>+</em> en haut à gauche, cherche Attesa et choisis la taille. Pour l'écran verrouillé, appuie longuement dessus, touche <em>Personnaliser</em>, puis ajoute le widget Attesa sous l'heure.</p>
-    </details>
+<section id="questions" class="tint">
+  <div class="wrap">
+    <div class="head reveal"><h2>Questions fréquentes</h2></div>
+    <div class="faq reveal">
+      <details>
+        <summary>Attesa est-elle gratuite&nbsp;?</summary>
+        <p>Oui, pour tes cinq premiers moments. Attesa+ débloque les moments illimités et les Activités en direct en un <strong>achat unique</strong> — pas d'abonnement.</p>
+      </details>
+      <details>
+        <summary>J'ai changé d'iPhone, comment récupérer Attesa+&nbsp;?</summary>
+        <p>Ouvre Attesa, va dans les réglages de l'app et touche <em>Restaurer mes achats</em>. L'achat est rattaché à ton compte Apple&nbsp;: il te suit d'un appareil à l'autre tant que tu utilises le même identifiant.</p>
+        <p>Si rien ne se passe, vérifie dans Réglages&nbsp;› ton nom&nbsp;› Médias et achats que tu es connecté avec le compte qui a servi à l'achat.</p>
+      </details>
+      <details>
+        <summary>Comment ajouter un widget&nbsp;?</summary>
+        <p>Appuie longuement sur ton écran d'accueil, touche <em>Modifier</em> puis <em>Ajouter un widget</em>, cherche Attesa et choisis la taille. Pour l'écran verrouillé, appuie longuement dessus, touche <em>Personnaliser</em>, puis ajoute le widget Attesa sous l'heure.</p>
+      </details>
+      <details>
+        <summary>Le décompte ne s'affiche pas sur mon écran verrouillé</summary>
+        <p>Les Activités en direct font partie d'Attesa+ et doivent être autorisées&nbsp;: Réglages&nbsp;› Apps&nbsp;› Attesa&nbsp;› Activités en direct. Vérifie aussi que le mode Économie d'énergie n'est pas actif, car il suspend les mises à jour en arrière-plan.</p>
+      </details>
+      <details>
+        <summary>Mes moments se synchronisent-ils entre mes appareils&nbsp;?</summary>
+        <p>Oui, si iCloud est activé sur tes appareils avec le même compte Apple. Tu peux aussi créer une sauvegarde complète depuis Réglages&nbsp;› Confidentialité et données, et la restaurer plus tard.</p>
+      </details>
+      <details>
+        <summary>Est-ce que mes données partent quelque part&nbsp;?</summary>
+        <p>Attesa ne demande aucun compte et n'affiche aucune publicité. Tes moments et tes photos restent sur tes appareils et dans ton iCloud personnel. Si tu l'acceptes — c'est désactivé par défaut —, Attesa envoie des statistiques d'usage anonymes via PostHog et des diagnostics de plantage via Sentry, tous deux hébergés dans l'Union européenne — jamais tes contenus, jamais à des fins publicitaires. Le détail est dans la <a href="privacy/">politique de confidentialité</a>.</p>
+      </details>
+      <details>
+        <summary>Comment supprimer mes données&nbsp;?</summary>
+        <p>Dans Réglages&nbsp;› Confidentialité et données, touche <em>Supprimer toutes mes données</em>&nbsp;: la suppression s'applique aussi à la copie iCloud. Tu peux aussi supprimer un moment à la fois, ou exporter tes données avant.</p>
+      </details>
+      <details>
+        <summary>Dans quelles langues Attesa est-elle disponible&nbsp;?</summary>
+        <p>En français, anglais, allemand, espagnol et italien.</p>
+      </details>
+    </div>
+  </div>
+</section>
 
-    <details>
-      <summary>Est-ce que mes données partent quelque part ?</summary>
-      <p>Attesa ne demande aucun compte et n'affiche aucune publicité. Tes moments et tes photos restent sur tes appareils et dans ton iCloud personnel. Si tu l'acceptes — c'est désactivé par défaut —, Attesa envoie des statistiques d'usage anonymes via PostHog et des diagnostics de plantage via Sentry, tous deux hébergés dans l'Union européenne — jamais tes contenus, jamais à des fins publicitaires.</p>
-    </details>
-
-    <details>
-      <summary>Comment supprimer mes données ?</summary>
-      <p>Supprimer l'app suffit&nbsp;: tout est stocké localement, rien n'est conservé ailleurs. Tu peux aussi supprimer un moment à la fois depuis la liste.</p>
-    </details>
-  </section>
-
-  <section>
-    <h2>Besoin d'aide ?</h2>
-    <div class="contact">
+<section id="aide">
+  <div class="wrap">
+    <div class="head reveal"><h2>Besoin d'aide&nbsp;?</h2></div>
+    <div class="help reveal">
       <p>Écris-moi à <a href="mailto:abdelhafid.younes@gmail.com?subject=Support%20Attesa">abdelhafid.younes@gmail.com</a>. Je réponds sous 48&nbsp;heures ouvrées.</p>
       <p>Pour aller plus vite, précise ta version d'iOS, ton modèle d'iPhone et ce que tu faisais au moment du problème.</p>
       <p>Attesa est développée par Abdelhafid Younes, développeur indépendant, en France.</p>
     </div>
-  </section>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap reveal">
+    <img src="assets/icon.png" alt="Icône d'Attesa" width="84" height="84" loading="lazy">
+    <h2>Ton prochain grand jour <span class="grad">commence ici.</span></h2>
+    <p>Crée ton premier compte à rebours en moins d'une minute.</p>
+    <a class="btn" href="https://apps.apple.com/fr/app/attesa/id6786703143">Télécharger sur l'App&nbsp;Store</a>
+  </div>
+</section>
 
 </main>
 
-<footer class="wrap">
-  <a href="/attesa-site/privacy/">Politique de confidentialité</a>
-  <a href="mailto:abdelhafid.younes@gmail.com">Contact</a>
-  <span class="spacer"></span>
-  <span>© 2026 Abdelhafid Younes</span>
+<footer>
+  <div class="wrap">
+    <a href="privacy/">Politique de confidentialité</a>
+    <a href="mailto:abdelhafid.younes@gmail.com">Contact</a>
+    <span class="sp"></span>
+    <span>© 2026 Abdelhafid Younes</span>
+  </div>
 </footer>
 
+<script>
+(function(){
+  // Compte à rebours vivant vers le prochain 28 décembre.
+  var now=new Date(), target=new Date(now.getFullYear(),11,28,9,0,0);
+  if(target-now<864e5) target.setFullYear(target.getFullYear()+1);
+  var pad=function(n){return String(n).padStart(2,"0")};
+  document.getElementById("when").textContent="28 décembre "+target.getFullYear();
+  function tick(){
+    var t=Math.max(0,target-new Date()), s=Math.floor(t/1000);
+    document.getElementById("d").textContent=Math.floor(s/86400);
+    document.getElementById("h").textContent=pad(Math.floor(s%86400/3600));
+    document.getElementById("m").textContent=pad(Math.floor(s%3600/60));
+    document.getElementById("s").textContent=pad(s%60);
+  }
+  tick(); setInterval(tick,1000);
+
+  // Ambiances : jour et nuit.
+  var moods=[["rome","Rome"],["reunion","Retrouvailles"],["keys","Remise des clés"],["nature","Phénomène naturel"],
+    ["freshstart","Nouveau départ"],["letter","Lettre à mon futur moi"],["challenge","Défi personnel"],["adoption","Adoption"],
+    ["firsttime","Première fois"],["release","Sortie très attendue"],["keepsake","Date souvenir"]];
+  var box=document.getElementById("moods"), nightLoaded=false;
+  moods.forEach(function(m){
+    var f=document.createElement("figure"); f.className="mood";
+    f.innerHTML='<img src="assets/'+m[0]+'-clair.jpg" alt="Ambiance '+m[1]+'" loading="lazy">'+
+                '<img class="night" data-src="assets/'+m[0]+'-sombre.jpg" alt="" loading="lazy">'+
+                '<figcaption>'+m[1]+'</figcaption>';
+    box.appendChild(f);
+  });
+  var day=document.getElementById("day"), night=document.getElementById("night"), phone=document.getElementById("phone");
+  function set(isNight){
+    if(isNight && !nightLoaded){
+      box.querySelectorAll("img.night").forEach(function(i){i.src=i.dataset.src});
+      nightLoaded=true;
+    }
+    box.classList.toggle("night",isNight);
+    day.setAttribute("aria-pressed",String(!isNight)); night.setAttribute("aria-pressed",String(isNight));
+    phone.style.backgroundImage="url(assets/rome-"+(isNight?"sombre":"clair")+".jpg)";
+  }
+  day.onclick=function(){set(false)}; night.onclick=function(){set(true)};
+  if(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) set(true);
+
+  // Apparition douce au défilement.
+  var els=document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches){
+    els.forEach(function(e){e.classList.add("in")}); return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
