@@ -129,6 +129,7 @@
   .shots{display:flex;gap:1.2rem;justify-content:center;align-items:flex-end}
   .shots img{border-radius:1.9rem;box-shadow:0 0 0 .32rem #17100f,var(--shadow);width:44%;height:auto}
   .shots img:last-child{transform:translateY(-1.6rem)}
+  .shots img.framed{border-radius:0;box-shadow:none;filter:drop-shadow(0 24px 30px rgba(200,54,95,.28))}
   .list{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.9rem}
   .list li{display:flex;gap:.8rem;color:var(--ink-2)}
   .list li::before{content:"";flex:0 0 .55rem;height:.55rem;margin-top:.55rem;border-radius:50%;background:linear-gradient(120deg,var(--a1),var(--a2))}
@@ -214,7 +215,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.73-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.75 2.21 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.7.71 2.87.69 1.19-.02 1.94-1.08 2.66-2.15.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.54ZM14.2 6.1c.61-.74 1.02-1.77.91-2.8-.88.04-1.94.59-2.57 1.33-.56.65-1.06 1.7-.93 2.7.98.08 1.98-.5 2.59-1.23Z"/></svg>
         Télécharger sur l'App&nbsp;Store
       </a>
-      <p class="meta">Gratuit jusqu'à 5 moments · iPhone, iPad et Apple Watch · iOS&nbsp;17 ou version ultérieure</p>
+      <p class="meta">Gratuit pour tes 5 premiers moments · iPhone, iPad et Apple Watch · iOS&nbsp;17 ou version ultérieure</p>
     </div>
 
     <div class="stage" aria-hidden="true">
@@ -260,7 +261,7 @@
       </div>
       <div class="feat reveal">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
-        <h3>Activités en direct <span class="tag">ATTESA+</span></h3>
+        <h3>Activités en direct</h3>
         <p>Le décompte en temps réel sur l'écran verrouillé et dans la Dynamic Island, à l'approche du grand jour.</p>
       </div>
       <div class="feat reveal">
@@ -311,8 +312,8 @@
 <section id="preparer">
   <div class="wrap duo">
     <div class="shots reveal">
-      <img src="assets/shot-editeur.jpg" alt="L'éditeur d'Attesa : emoji, couleur, illustration et ambiance" loading="lazy" width="506" height="1100">
-      <img src="assets/shot-detail.jpg" alt="Un moment dans Attesa : 46 jours avant un week-end à Rome" loading="lazy" width="506" height="1100">
+      <img class="framed" src="assets/shot-editeur.webp" alt="L'éditeur d'Attesa : emoji, couleur, illustration et ambiance" loading="lazy" width="536" height="1146">
+      <img class="framed" src="assets/shot-detail.webp" alt="Un moment dans Attesa : 45 jours avant un week-end à Rome" loading="lazy" width="536" height="1146">
     </div>
     <div class="reveal">
       <h2>Attendre, c'est aussi se préparer.</h2>
@@ -365,8 +366,8 @@
         <h3>Attesa</h3>
         <div class="price">Gratuit</div>
         <ul>
-          <li>Jusqu'à 5 moments</li>
-          <li>Widgets et Apple Watch</li>
+          <li>5 moments au total, toutes fonctions comprises</li>
+          <li>Widgets, Apple Watch et Activités en direct</li>
           <li>Photos, illustrations et ambiances</li>
           <li>Tâches, rappels et imports</li>
         </ul>
@@ -376,8 +377,8 @@
         <div class="price">Achat unique</div>
         <ul>
           <li>Moments illimités</li>
-          <li>Activités en direct et Dynamic Island</li>
           <li>Tout ce qu'offre la version gratuite</li>
+          <li>Un seul achat, sans abonnement</li>
           <li>Prix affiché dans l'app, selon ton pays</li>
         </ul>
       </div>
@@ -391,7 +392,7 @@
     <div class="faq reveal">
       <details>
         <summary>Attesa est-elle gratuite&nbsp;?</summary>
-        <p>Oui, pour tes cinq premiers moments. Attesa+ débloque les moments illimités et les Activités en direct en un <strong>achat unique</strong> — pas d'abonnement.</p>
+        <p>Oui, pour tes cinq premiers moments, avec toutes les fonctions, Activités en direct comprises. Ils se comptent au total&nbsp;: un moment supprimé compte toujours. Attesa+ débloque ensuite les moments illimités en un <strong>achat unique</strong> — pas d'abonnement.</p>
       </details>
       <details>
         <summary>J'ai changé d'iPhone, comment récupérer Attesa+&nbsp;?</summary>
@@ -404,7 +405,7 @@
       </details>
       <details>
         <summary>Le décompte ne s'affiche pas sur mon écran verrouillé</summary>
-        <p>Les Activités en direct font partie d'Attesa+ et doivent être autorisées&nbsp;: Réglages&nbsp;› Apps&nbsp;› Attesa&nbsp;› Activités en direct. Vérifie aussi que le mode Économie d'énergie n'est pas actif, car il suspend les mises à jour en arrière-plan.</p>
+        <p>Les Activités en direct doivent être autorisées&nbsp;: Réglages&nbsp;› Apps&nbsp;› Attesa&nbsp;› Activités en direct. Vérifie aussi que le mode Économie d'énergie n'est pas actif, car il suspend les mises à jour en arrière-plan.</p>
       </details>
       <details>
         <summary>Mes moments se synchronisent-ils entre mes appareils&nbsp;?</summary>
